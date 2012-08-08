@@ -4,4 +4,5 @@ Accepts a query string and a dict of url options, which is composed of anything 
 
 Todo: 
 	1. Implement more options, such as returning names / descriptions
-	2. Return results from arbitrary number of pages
+	2. Return results from arbitrary number of pages [Complete - 8/8/12]
+	3. Implement lxml as a substitute to BeautifulSoup
