@@ -19,5 +19,5 @@ def google(query, urloptions=None):
 if len(sys.argv) < 2:
     sys.exit("Usage is (python) google 'query'\n")
 else:
-    print  "\n".join(google(sys.argv[1], {"start":10}))#! /usr/bin/env python 
+    print  "\n".join(google(sys.argv[1], {"start":10}))
 
