@@ -60,16 +60,4 @@ else:
     (results, url) = google(sys.argv[1], opts, max_results, urloptions)
 
     print "\n".join(results)
-    
-    
-  #  print "\n".join(results[0])
-  #  print "\n" + results[1]
 
-    
-
-    
-    
-    """"for x in xrange(0, max_results):
-        print results[0][x] + "\t" + results[1][x] + "\n"
-
-"""
