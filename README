@@ -4,6 +4,6 @@ Accepts a query string, a number of results to get and a dict of url options, wh
 of anything you wish to modify the URL with that Google accepts as url options. 
 
 Todo: 
-	1. Implement more options, such as returning names / descriptions
+	1. Implement returning names / descriptions [Complete - 8/11/12]
 	2. Return results from arbitrary number of pages [Complete - 8/8/12]
-	3. Implement lxml as a substitute to BeautifulSoup
+	3. Implement better options and option handling
