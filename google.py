@@ -12,37 +12,44 @@ def google(query, opts = None, max_results = None, urloptions = None):
     output = []
     count = 0
     
-   # while count <= max_results:
-    url += "&start=" + str(count)
-    count += 10
-    soup = BeautifulSoup(requests.get(url).content)
-    for link in soup('a'):
-        if "/url?q=" in link['href']:
-            if opts is not None:
-                if opts == "links":
-                    output.append(str(link['href'].split('&')[0][7:]))
-                elif opts == "names":
-                    try:
-                        output.append(str(link.text))
-                    except:
-                        output.append("Name Contains Illegal Unicode Characters!")
-                elif opts == "descs":
-                    try:
-                        output.append(str(link.text))
-                    except:
-                        output.append("Description Contains Illegal Unicode")  
+    while count <= max_results - 10:
+        url += "&start=" + str(count)
+        count += 10
+        soup = BeautifulSoup(requests.get(url).content)
+        for link in soup('a'):
+            if "/url?q=" in link['href']:
+                if opts is not None:
+                    if opts == "links":
+                        output.append(str(link['href'].split('&')[0][7:]))
+                        print str(link['href'].split('&')[0][7:])
+                    elif opts == "names":
+                        try:
+                            output.append(str(link.text))
+                            print str(link.text)
+                        except:
+                            output.append("\t ---- Name Contains Illegal Unicode Characters!")
+                            print "\t ---- Name contains illegal Unicode Characters!"
+                    elif opts == "descs":
+                        try:
+                            output.append(str(unicode((link.find_next('div').find('span', 'st').text)))
+                            print str(unicode(link.find_next('div').find('span', 'st').text))
+                        except:
+                            output.append("\t ---- Description Contains Illegal Unicode")
+                            print "\t ---- Description contins illegal Unicode."
+                    else:
+                        sys.exit("\tUnrecognized value '%s' for paramater opts! Recognized Parameters: names | links | descs" % opts)
+                        break
                 else:
-                    sys.exit("Unrecognized value '%s' for paramater opts! Recognized Parameters: names | links | descs" % opts)
-            else:
-                output.append(str(link['href'].split('&')[0][7:]))
+                    output.append(str(link['href'].split('&')[0][7:]))
+                    print str(link['href'].split('&')[0][7:])
 
-    return (output, url)
-
+    return output
 
 
+print ""
     
 if len(sys.argv) < 2:
-    sys.exit("Usage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
+    sys.exit("\tUsage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
 else:
     try:
         opts = sys.argv[2]
@@ -53,11 +60,11 @@ else:
     except:
         max_results = 10
     try:
-        urloptions = sys.argv[4]
+        urloptions = dict(sys.argv[4])
     except:
         urloptions = None
         
-    (results, url) = google(sys.argv[1], opts, max_results, urloptions)
+    results = google(sys.argv[1], opts, max_results, urloptions)
 
-    print "\n".join(results)
+   # print "\n".join(results)
 
