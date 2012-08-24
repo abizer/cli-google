@@ -45,26 +45,26 @@ def google(query, opts = None, max_results = None, urloptions = None):
 
     return output
 
+if __name__ == "__main__":
+    print ""
 
-print ""
-    
-if len(sys.argv) < 2:
-    sys.exit("\tUsage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
-else:
-    try:
-        opts = sys.argv[2]
-    except:
-        opts = None
-    try:
-        max_results = int(sys.argv[3])
-    except:
-        max_results = 10
-    try:
-        urloptions = dict(sys.argv[4])
-    except:
-        urloptions = None
-        
-    results = google(sys.argv[1], opts, max_results, urloptions)
+    if len(sys.argv) < 2:
+        sys.exit("\tUsage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
+    else:
+        try:
+            opts = sys.argv[2]
+        except:
+            opts = None
+        try:
+            max_results = int(sys.argv[3])
+        except:
+            max_results = 10
+        try:
+            urloptions = dict(sys.argv[4])
+        except:
+            urloptions = None
 
-   # print "\n".join(results)
+        results = google(sys.argv[1], opts, max_results, urloptions)
+
+       # print "\n".join(results)
 
