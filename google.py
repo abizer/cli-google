@@ -55,7 +55,7 @@ def google(query, opts = None, max_results = None, urloptions = None):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        sys.exit("\tUsage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
+        sys.exit("\tUsage is (python) google 'query' [(names | descs | links)] [max_results] [urloptions]\n")
     else:
         try:
             opts = sys.argv[2]
