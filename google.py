@@ -1,5 +1,7 @@
 #!/usr/bin/python 
 
+# google.py 'query' [(names | descs | links)] [max_results] [urloptions]
+
 from bs4 import BeautifulSoup
 import urllib, requests, sys
 
@@ -15,9 +17,15 @@ def google(query, opts = None, max_results = None, urloptions = None):
     while count <= max_results - 10:
         url += "&start=" + str(count)
         count += 10
-        soup = BeautifulSoup(requests.get(url).content)
-        for link in soup('a'):
-            if "/url?q=" in link['href']:
+        page = requests.get(url).content
+        file = open("results.html", 'w')
+        file.write(page)
+        file.close
+        soup = BeautifulSoup(page)
+        for result in soup.find_all('li', class_='g'):
+            link = result.find('a')
+            #if "/url?q=" in link['href']:
+            if link and link['href'].startswith("/url"):
                 if opts is not None:
                     if opts == "links":
                         output.append(str(link['href'].split('&')[0][7:]))
@@ -31,7 +39,7 @@ def google(query, opts = None, max_results = None, urloptions = None):
                             print "\t ---- Name contains illegal Unicode Characters!"
                     elif opts == "descs":
                         try:
-                            output.append(str(unicode((link.find_next('div').find('span', 'st').text)))
+                            output.append(str(unicode((link.find_next('div').find('span', 'st').text))))
                             print str(unicode(link.find_next('div').find('span', 'st').text))
                         except:
                             output.append("\t ---- Description Contains Illegal Unicode")
@@ -46,10 +54,8 @@ def google(query, opts = None, max_results = None, urloptions = None):
     return output
 
 if __name__ == "__main__":
-    print ""
-
     if len(sys.argv) < 2:
-        sys.exit("\tUsage is (python) google 'query' [options (names || descs || links)[max_results [urloptions]]]\n")
+        sys.exit("\tUsage is (python) google 'query' [(names | descs | links)] [max_results] [urloptions]\n")
     else:
         try:
             opts = sys.argv[2]
