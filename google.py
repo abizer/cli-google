@@ -28,7 +28,7 @@ def google(query, opts = None, max_results = None, urloptions = None):
             if link and link['href'].startswith("/url"):
                 if opts is not None:
                     if opts == "links":
-                        output.append(str(link['href'].split('&')[0][7:]))
+                        output.append(str(link['href'].split('&')[0][7:])) # when this was written, the first 7 characters where a Google redirect
                         print str(link['href'].split('&')[0][7:])
                     elif opts == "names":
                         try:
@@ -45,7 +45,7 @@ def google(query, opts = None, max_results = None, urloptions = None):
                             output.append("\t ---- Description Contains Illegal Unicode")
                             print "\t ---- Description contins illegal Unicode."
                     else:
-                        sys.exit("\tUnrecognized value '%s' for paramater opts! Recognized Parameters: names | links | descs" % opts)
+                        sys.exit("\tUnrecognized value '%s' for parameter opts! Recognized Parameters: names | links | descs" % opts)
                         break
                 else:
                     output.append(str(link['href'].split('&')[0][7:]))
@@ -56,6 +56,7 @@ def google(query, opts = None, max_results = None, urloptions = None):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit("\tUsage is (python) google 'query' [(names | descs | links)] [max_results] [urloptions]\n")
+        # Obviously there are better ways to do the following then this try/except chain.
     else:
         try:
             opts = sys.argv[2]
