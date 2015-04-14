@@ -1,9 +1,10 @@
 A simple Python function / script that returns a list of Google search results. 
 
-Accepts a query string, a number of results to get and a dict of url options, which is composed 
-of anything you wish to modify the URL with that Google accepts as url options. 
+Accepts a query string, a number of results to get and a dict of url options, which is composed of anything you want to modify the URL with that Google accepts as url options. 
 
 Todo: 
 	1. Implement returning names / descriptions [Complete - 8/11/12]
 	2. Return results from arbitrary number of pages [Complete - 8/8/12]
 	3. Implement better options and option handling
+
+This script has not been updated since 2012 and is not gauranteed to work any longer.
